@@ -29,7 +29,8 @@ Route::get('pform',function () {
     return view('pages/pform');
 });
 Route::get('home',function () {
-    return view('pages/home');
+    $name = ['John Doe1','John Doe5','John Doe4','John Doe3','John Doe2'];
+    return view('pages/home',compact('name'));
 });
 
 
