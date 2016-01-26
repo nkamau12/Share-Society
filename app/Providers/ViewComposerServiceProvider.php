@@ -14,9 +14,7 @@ class ViewComposerServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        view()->composer('partials.navbar',function($view){
-            $view->with('latest', Article::latest()->first());
-        });
+
     }
 
     /**

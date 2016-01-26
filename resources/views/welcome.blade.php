@@ -3,13 +3,20 @@
     <head>
         <title>Share Society</title>
         <link rel="stylesheet" href="css/login.min.css">
-
-
-
     </head>
     <body>
     <div class="container">
         <div class="row">
+            @if (count($errors) > 0)
+                <div class="alert alert-danger">
+                    <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <div class="container" id="formContainer">
 
                 <form class="form-signin" id="login" role="form" method="POST" action="{{ url('/auth/login') }}">
@@ -30,8 +37,6 @@
                             </div>
                     </div>
                     <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-                    <div style="text-align:center">OR</div>
-                    <a href="stats" class="btn btn-lg btn-primary btn-block">View Stats</a>
                 </form>
 
                 <form class="form-signin" id="recover" role="form" method="POST" action="{{ url('/password/email') }}">
@@ -50,5 +55,6 @@
         </div>
     </div>
     <script src="/js/login.min.js"></script>
+    <script src="/js/all.js"></script>
     </body>
 </html>

@@ -1,12 +1,6 @@
 @extends('app')
 
 @section('content')
-    @include('/partials/searchuser')
-    <h1>Purchase "Family"</h1>
-    <hr/>
-    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-        Change Family
-    </button>
     {!! Form::open(['url'=>'groups']) !!}
     <div class="form-group">
         {!! Form::label('clothing_total','Clothing Total: ',['class'=>'col-md-4 control-label']) !!}
@@ -27,19 +21,19 @@
         </div>
     </div>
     <div class="form-group">
-        <label class="col-md-4 control-label">     </label>
-        <div class="col-md-3">
-            {!! Form::submit('Purchase', ['class'=> 'btn btn-primary form-control']) !!}
-
-        </div>
-        <div class="col-md-3">
-            {!! Form::reset('Clear', ['class'=> 'btn btn-primary form-control']) !!}
+        {!! Form::label('p_date','Date of Purchase: ',['class'=>'col-md-4 control-label']) !!}
+        <div class="col-md-6">
+            {!! Form::text('p_date',null,['class'=>'form-control','placeholder'=>'YYYY-mm-dd']) !!}
         </div>
     </div>
+
+    <label class="col-md-4 control-label">     </label>
+    <div class="col-md-3">
+        {!! Form::submit('Purchase', ['class'=> 'btn btn-primary form-control']) !!}
+
+    </div>
+    <div class="col-md-3">
+        {!! Form::reset('Clear', ['class'=> 'btn btn-primary form-control']) !!}
+    </div>
     {!! Form::close() !!}
-@endsection
-@section('footer')
-    <script>
-        $('#myModal').modal()
-    </script>
 @endsection

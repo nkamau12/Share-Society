@@ -4,7 +4,7 @@
     {!! Form::open(['url'=>'groups','class'=>'modal-body']) !!}
     <div class="form-group">
         {!! Form::label('name', 'Search by Name:') !!}
-        {!! Form::select('name[]',$name,null,['id'=>'name','class'=>'form-control','multiple']) !!}
+        {!! Form::select('members[]',$members,null,['id'=>'name','class'=>'form-control','multiple']) !!}
     </div>
 
     <div class="form-group">

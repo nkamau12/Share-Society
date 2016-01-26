@@ -28,7 +28,7 @@ class User extends Model implements AuthenticatableContract,
      *
      * @var array
      */
-    protected $fillable = ['name', 'email', 'password'];
+    protected $fillable = ['UID','name', 'email', 'password','permission'];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -38,16 +38,21 @@ class User extends Model implements AuthenticatableContract,
     protected $hidden = ['password', 'remember_token'];
 
     /**
-     * A user can have many articles
+     * A user can be a manager
+     *
+     * @return bool
+     */
+    public function isAManager()
+    {
+        return $this->select('permission')->get;
+    }
+
+    /**
+     * User can have many clients
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function articles(){
-        return $this->hasMany('App\Article');
-    }
-
-    public function isATeamManager()
-    {
-        return true;
+    public function purchases(){
+        return $this->hasMany('App\purchase');
     }
 }
