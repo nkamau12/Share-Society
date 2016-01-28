@@ -7,14 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 class purchase extends Model
 {
     protected $table = 'purchase';
-
+    protected $primaryKey = 'PID';
     protected $fillable = [
-        'Category',
+        'ClothingTotal',
+        'FurnitureTotal',
+        'OtherTotal',
         'DateOfPurchase',
-        'Total'
+        'MID'
         ];
 
     public function purchasedby(){
-        return $this->belongsTo('App\member');
+        return $this->belongsTo('App\member','MID','MID');
     }
 }

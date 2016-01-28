@@ -24,13 +24,13 @@ class MemberRequest extends Request
     public function rules()
     {
         return [
-            'fname'=>'required',
-            'lname'=>'required',
+            'Fname'=>'required',
+            'Lname'=>'required',
             'city'=>'required',
             'address1'=>'required',
-            'postalCode'=>'required|max:6|min6',
+            'postalCode'=>'required|max:6|min:6',
             'province'=>'required',
-            'agency'=>'required'
+            'Agency'=>'required'
         ];
     }
 }

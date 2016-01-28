@@ -29,4 +29,7 @@ Route::controllers([
 Route::get('home','FirstController@index');
 Route::get('create','FirstController@create');
 Route::get('stats','FirstController@stats');
+Route::post('create','FirstController@store');
 Route::resource('members','membercontroller');
+Route::get('members/{id}/create','membercontroller@create');
+Route::post('members/{id}/create','membercontroller@store');

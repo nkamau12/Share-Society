@@ -8,14 +8,16 @@ class family extends Model
 {
 
     protected $table = 'family';
-
+    protected $primaryKey = 'FID';
     protected $fillable = [
         'Agency',
-        'letterdate',
+        'address1',
+        'address2',
+        'city',
+        'postalCode',
+        'province',
         'Address',
         'PhoneNo',
-        'StartDate'
-
     ];
     /*
      * Family can have many members
@@ -23,4 +25,12 @@ class family extends Model
     public function member(){
         return $this->hasMany('App\member');
     }
+    public static function findByid($id, $columns = array('*')) {
+        if ( ! is_null($member = static::where('FID',$id)->first($columns))) {
+            return $member;
+        }
+
+        throw new ModelNotFoundException;
+    }
+
 }

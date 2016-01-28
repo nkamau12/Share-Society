@@ -13,10 +13,12 @@ class CreateClientTable extends Migration
     public function up()
     {
         Schema::create('client', function (Blueprint $table) {
-            $table->string('MID');
-            $table->string('UID');
+            $table->integer('MID');
+            $table->integer('UID');
             $table->string('page');
             $table->json('data');
+            $table->timestamp('updated_at');
+            $table->timestamp('created_at');
             $table->primary(array('MID','UID'));
         });
     }

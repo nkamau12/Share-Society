@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\MemberRequest;
 use Illuminate\Http\Request;
 use App\member;
+use Carbon\Carbon;
 use App\family;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -23,9 +24,8 @@ class FirstController extends Controller
     public function index(){
 
         $members = member::all();
-        $activem = 0;
-
-        return view('pages.home',compact('members','activem'));
+        $activec=0;
+        return view('pages.home',compact('members','activec'));
     }
 
     /**
@@ -49,6 +49,8 @@ class FirstController extends Controller
     }
 
 
+
+
     /**
      * Show the view for stats
      *
@@ -57,10 +59,28 @@ class FirstController extends Controller
      */
     public function store(MemberRequest $request){
 
-        $member=member::create($request->all());
-        $MID=$member;
-        return redirect('members.'.$MID);
+        $family = new family;
+        $member = new member;
+        $family->Agency = $request['Agency'];
+        $family->letterdate = Carbon::now();
+        $family->Address1 = $request['address1'];
+        $family->address2 = $request['address2'];
+        $family->city = $request['city'];
+        $family->postalCode = $request['postalCode'];
+        $family->PhoneNo = $request['PhoneNo'];
+        $family->province = $request['province'];
+        $family->StartDate = Carbon::now();
+        $family->save();
+        $FID=family::orderBy('FID','desc')->first()->FID;
+        $member->Fname = $request['Fname'];
+        $member->Lname = $request['Lname'];
+        $member->Other =  $request['Other']==null ? false : true;
+        $member->Clothing =  $request['Clothing']==null ? false : true;
+        $member->Furniture =  $request['Furniture']==null ? false : true;
+        $member->FID = $FID;
+        $member->save();
+        $MID=member::orderBy('MID','desc')->first()->MID;
+        return redirect('members/'.$MID);
 
     }
-
 }

@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\MemberRequest;
 use App\Http\Requests\PurchaseRequest;
 use Illuminate\Http\Request;
-
+use Carbon\Carbon;
 use App\Http\Requests;
 use App\member;
 use App\family;
@@ -33,13 +34,13 @@ class membercontroller extends Controller
      */
     public function create($id)
     {
-        $member=member::findOrFail($id);
+        $member=member::findByid($id);
         $pallowed = [
             'clothing'=>$member->select('Clothing')->get(),
             'furniture' => $member->select('Furniture')->get(),
             'other' => $member->select('Other')->get()
         ];
-        return view('members.pform',compact('pallowed'));
+        return view('members.pform',compact('pallowed','id'));
     }
 
     /**
@@ -48,10 +49,12 @@ class membercontroller extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(PurchaseRequest $request,$id)
+    public function store(Request $request,$id)
     {
-        $purchase=purchase::create($request->all());
-        return redirect('member.previousp',compact('purchases'));
+        $attribute=array("MID"=>$id);
+        $attribute=array_merge($request->all(),$attribute);
+        $purchase=purchase::create($attribute);
+        return redirect('members/'.$id);
     }
 
     /**
@@ -62,9 +65,9 @@ class membercontroller extends Controller
      */
     public function show($id)
     {
-        $purchases = member::findOrFail($id)->purchase();
-
-        return view('member.previousp',compact('purchases'));
+        $members = member::findByid($id)->Lname;
+        $purchases = purchase::where('MID',$id)->get();
+        return view('members.previousp',compact('purchases','id','members'));
     }
 
     /**
@@ -75,9 +78,11 @@ class membercontroller extends Controller
      */
     public function edit($id)
     {
-        $memberbio=member::findOrFail($id);
-
-        return view('member.edit',compact('memberbio'));
+        $memberbio=member::where('MID',$id)->get()->toArray();
+        $familybio=family::where('FID',$memberbio[0]["FID"])->get()->toArray();
+        $memberbio=$memberbio[0];
+        $memberbio=collect(array_merge($memberbio,$familybio[0]));
+        return view('members.edit',compact('id','memberbio'));
     }
 
     /**
@@ -89,10 +94,18 @@ class membercontroller extends Controller
      */
     public function update(MemberRequest $request, $id)
     {
+        $memberbio=member::where('MID',$id)->get()->toArray();
+        $family=family::where('FID',$memberbio[0]["FID"]);
         $member = member::findOrFail($id);
-        $member->update($request->all());
-
-        return redirect('members.previousp');
+        $member->Fname = $request['Fname'];
+        $member->Lname = $request['Lname'];
+        $member->Other =  $request['Other']==null ? false : true;
+        $member->Clothing =  $request['Clothing']==null ? false : true;
+        $member->Furniture =  $request['Furniture']==null ? false : true;
+        $member->save();
+        $family= family::findOrFail($member->FID);
+        $family->update($request->only(['Agency','address1','address2','city','postalCode','province','PhoneNo']));
+        return redirect('members/'.$id);
     }
 
     /**

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class member extends Model
 {
     protected $table = 'member';
-
+    protected $primaryKey = 'MID';
     protected $fillable = [
         'Fname',
         'Lname',
@@ -17,7 +17,7 @@ class member extends Model
         ];
 
     public function family(){
-        return $this->belongsTo('App\family');
+        return $this->belongsTo('App\family','FID','FID');
     }
 
     public function purchases(){
@@ -26,5 +26,13 @@ class member extends Model
 
     public function isclient(){
         return $this->hasOne('App\client');
+    }
+
+    public static function findByid($id, $columns = array('*')) {
+        if ( ! is_null($member = static::where('MID',$id)->first($columns))) {
+            return $member;
+        }
+
+        throw new ModelNotFoundException;
     }
 }

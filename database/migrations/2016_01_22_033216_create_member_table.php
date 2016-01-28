@@ -13,14 +13,15 @@ class CreateMemberTable extends Migration
     public function up()
     {
         Schema::create('member', function (Blueprint $table) {
-            $table->String('MID');
+            $table->increments('MID');
             $table->String('Fname');
             $table->String('Lname');
             $table->boolean('Clothing');
             $table->boolean('Furniture');
             $table->boolean('Other');
-            $table->String('FID');
-            $table->primary('MID');
+            $table->integer('FID');
+            $table->timestamp('updated_at');
+            $table->timestamp('created_at');
             $table->foreign('FID')->references('FID')->on('family')->onDelete('cascade');
         });
     }

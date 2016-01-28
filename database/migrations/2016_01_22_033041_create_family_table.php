@@ -13,13 +13,18 @@ class CreateFamilyTable extends Migration
     public function up()
     {
         Schema::create('family', function (Blueprint $table) {
-            $table->string('FID');
+            $table->increments('FID');
             $table->string('Agency');
             $table->date('letterdate');
-            $table->string('Address');
+            $table->string('address1');
+            $table->string('address2');
+            $table->string('city');
+            $table->string('postalCode');
+            $table->string('province');
             $table->integer('PhoneNo');
             $table->date('StartDate');
-            $table->primary('FID');
+            $table->timestamp('updated_at');
+            $table->timestamp('created_at');
         });
     }
 

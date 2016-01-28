@@ -5,9 +5,9 @@
 
 
 
-    <h1>Edit :{!! $memberbio->fname !!}</h1>
+    <h1>Edit : {!! $memberbio["Lname"] !!}</h1>
     <hr/>
-    {!! Form::model($memberbio, ['method'=> 'PATCH', 'action' => ['membercontroller@update', $memberbio->MID]]) !!}
+    {!! Form::model($memberbio, ['method'=> 'PATCH', 'action' => ['membercontroller@update', $id]]) !!}
     @include('partials.form',['submitButtonText'=>'Update'])
     {!! Form::close() !!}
 

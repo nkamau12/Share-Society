@@ -2,7 +2,7 @@
 <div class="form-group">
     {!! Form::label('fname','First Name',['class'=>'col-md-4 control-label']) !!}
     <div class="col-md-6">
-        {!! Form::text('fname',null,['class'=>'form-control','placeholder'=>'First Name']) !!}
+        {!! Form::text('Fname',null,['class'=>'form-control','placeholder'=>'First Name']) !!}
     </div>
 
 </div>
@@ -10,7 +10,7 @@
 <div class="form-group">
     {!! Form::label('lname','Last Name',['class'=>'col-md-4 control-label']) !!}
     <div class="col-md-6">
-    {!! Form::text('lname',null,['class'=>'form-control','placeholder'=>'Last Name']) !!}
+    {!! Form::text('Lname',null,['class'=>'form-control','placeholder'=>'Last Name']) !!}
     </div>
 </div>
 
@@ -48,19 +48,19 @@
         {!! Form::text('province','BC',['class'=>'form-control','placeholder'=>'Province']) !!}
     </div>
 </div>
-<div class="form-group">
+<div class="form-group" id="checks" >
     <label class="col-md-4 control-label">Items Allowed</label>
     <div class="col-md-2">
-        {!! Form::checkbox('clothing',null) !!}
+        {!! Form::checkbox('Clothing',null) !!}
         {!! Form::label('clothing','Clothing') !!}
 
     </div>
     <div class="col-md-2">
-        {!! Form::checkbox('furniture',null) !!}
-        {!! Form::label('furniture','Furniture') !!}
+        {!! Form::checkbox('Furniture',null) !!}
+        {!! Form::label('Gurniture','Furniture') !!}
     </div>
     <div class="col-md-2">
-        {!! Form::checkbox('other',null) !!}
+        {!! Form::checkbox('Other',null) !!}
         {!! Form::label('other','Other') !!}
     </div>
 </div>
@@ -68,14 +68,14 @@
 <div class="form-group">
     {!! Form::label('agency','Agency From',['class'=>'col-md-4 control-label']) !!}
     <div class="col-md-6">
-        {!! Form::text('agency',null,['class'=>'form-control','placeholder'=>'Agency From']) !!}
+        {!! Form::text('Agency',null,['class'=>'form-control','placeholder'=>'Agency From']) !!}
     </div>
 </div>
 
 <div class="form-group">
     {!! Form::label('phone','Phone Number',['class'=>'col-md-4 control-label']) !!}
     <div class="col-md-6">
-        {!! Form::text('phone',null,['class'=>'form-control','required','placeholder'=>'Phone Number']) !!}
+        {!! Form::text('PhoneNo',null,['class'=>'form-control','required','placeholder'=>'Phone Number']) !!}
     </div>
 </div>
 

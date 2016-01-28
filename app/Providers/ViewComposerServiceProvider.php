@@ -2,7 +2,8 @@
 
 namespace App\Providers;
 
-use App\Article;
+use App\client;
+use App\member;
 use Illuminate\Support\ServiceProvider;
 
 class ViewComposerServiceProvider extends ServiceProvider
@@ -14,8 +15,21 @@ class ViewComposerServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-
+        view()->composer('partials.navbar',function($view){
+            $clients = member::all();
+            $activem = array();
+            $i=0;
+            foreach($clients as $client){
+                $activem[] = array(
+                    "id" => $client->MID,
+                    "name"=> $client->Fname." ".$client->Lname,
+                );
+                $i++;
+            }
+           $view->with('activem',$i)->with('members',$activem);
+        });
     }
+
 
     /**
      * Register the application services.

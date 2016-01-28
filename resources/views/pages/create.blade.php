@@ -3,7 +3,7 @@
 @section('content')
     <h1>Create Family</h1>
     <hr/>
-    {!! Form::open(['url'=>'groups']) !!}
+    {!! Form::open(['url'=>'create']) !!}
     @include('partials.form',['submitButtonText'=>'Save'])
     {!! Form::close() !!}
 

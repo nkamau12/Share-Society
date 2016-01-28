@@ -13,12 +13,14 @@ class CreatePurchaseTable extends Migration
     public function up()
     {
         Schema::create('purchase', function (Blueprint $table) {
-            $table->String('PID');
-            $table->String('Category');
+            $table->increments('PID');
+            $table->double('ClothingTotal');
+            $table->double('FurnitureTotal');
+            $table->double('OtherTotal');
             $table->date('DateOfPurchase');
-            $table->double('Total');
-            $table->String('MID');
-            $table->primary('PID');
+            $table->integer('MID');
+            $table->timestamp('updated_at');
+            $table->timestamp('created_at');
             $table->foreign('MID')->references('MID')->on('member')->onDelete('set null');
         });
     }
